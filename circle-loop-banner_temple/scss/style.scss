@@ -1,0 +1,310 @@
+@import 'reset';
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+$size: 400px;
+$deg : 50deg;
+
+figure{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #484361;
+    opacity: 0.5;
+
+    .banner{
+        width: $size;
+        height: $size;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: calc(-1 * $size / 2);
+        margin-top: calc(-1 * $size / 2.5);
+
+        ul{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            
+            //  li 공통 스타일
+            li{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.5;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: 9999px;
+                transition: 1s;
+
+                h2{
+                    font: normal 24px/1 'anton';
+                    color: #ccc;
+                    position: absolute;
+                    top: 120%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    letter-spacing: 2px;
+                    transition: 1.5s;
+                    text-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+                }
+                .inner{
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background-repeat: inherit; // inherit 자식요소가 부모요소를 상속받을때 사용 
+                    background-size: inherit;
+                    background-position: inherit;
+
+                    &::before,&::after{
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        background-image: inherit;
+                        background-repeat: inherit;
+                        background-size: inherit;
+                        border-radius: 50%;
+                        transition: 1.5s;
+                    }
+                    &::before{
+                        top: 10%;
+                        left: 2%;
+                        filter: blur(20px);
+                        opacity: 0.7;
+                    }
+                }
+                a{
+                    display: block;
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    bottom: 0%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-radius: 20px;
+                    opacity: 0;
+                    transition: opacity 1s, bottom 1s, width 0.5s 1s;
+                    
+                    &::before, span{
+                        content: '';
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font: 13px/1 'anton';
+                        letter-spacing: 2px;
+                        color: #999898;
+                        border-radius: 20px;
+                        background-image: inherit;
+                    }
+                    span{
+                        opacity: 0;
+                        text-indent: -40px; //글씨가 자연스럽게 이동하기위해 사용
+                        transition: 0.5s 1.4s;
+                    }
+                    &::before{
+                        transform: translateY(30%);
+                        filter: blur(10px) saturate(2);
+                        opacity: 0.8;
+                    }
+                        
+                }
+            }
+            // li 개별 스타일
+            li{
+                &:nth-of-type(1){
+                    transform: translateX(-$size * 3) scale(0.5);
+                    .inner::after,.inner::after{
+                        transform: rotate(-$deg * 3);
+                    }
+                }
+                &:nth-of-type(2){
+                    transform: translateX(-$size * 2) scale(0.5);
+                    .inner::after,.inner::after{
+                        transform: rotate(-$deg * 2);
+                    }
+                }
+                &:nth-of-type(3){
+                    transform: translateX(-$size) scale(0.5);
+                    .inner::after,.inner::after{
+                        transform: rotate(-$deg * 1);
+                    }
+                }
+                //활성화된 패널
+                &:nth-of-type(4){
+                    opacity: 1;
+                    transform: translateX(0px) scale(1);
+                    h2{
+                        font-size: 14vw;
+                        opacity: 0.8;
+                        color: #fff;
+                        top: -20vh;
+                        letter-spacing: 0px;
+                    }
+                    .inner::before,.inner::after{
+                        transform: rotate($deg * 0);
+                    }
+                    a{
+                        opacity: 1;
+                        bottom: -18%;
+                        width: 200px;
+                        
+                        span{
+                            opacity: 1;
+                            text-indent: 0px;
+                        }
+                        &.off{
+                            opacity: 0;
+                        }
+                    }
+
+                }
+                &:nth-of-type(5){
+                    transform: translateX($size) scale(0.5);
+                    .inner::after,.inner::after{
+                        transform: rotate($deg * 1);
+                    }
+                }
+                &:nth-of-type(6){
+                    transform: translateX($size * 2) scale(0.5);
+                    .inner::after,.inner::after{
+                        transform: rotate($deg * 2);
+                    }
+                }
+                &:nth-of-type(7){
+                    transform: translateX($size * 3) scale(0.5);
+                    .inner::after,.inner::after{
+                        transform: rotate($deg * 3);
+                    }
+                }
+            }
+        }    
+    }
+    .btns{
+        position: absolute;
+        bottom: 13vh;
+        right: 10vh;
+        display: flex;
+        gap: 50px;
+        transition: 0.5s;
+        
+        >div{
+            cursor: pointer;
+            width: 120px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: #999;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 12px/1 'arial';
+            color: #fff;
+            &:hover{
+                background-color: #555;
+            }
+        }
+        &.off{
+            right: 5vw;
+            opacity: 0;
+        }
+    }
+    .pop{
+        width: 50vw;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: -50vw;
+        background-color: rgba(0,0,0,0.05);
+        border-right: 1px solid rgba(0,0,0,0.02);
+        padding: 22vh 5vw 10vh 6vw;
+        backdrop-filter: blur(10px);
+        transition: 0.5s;
+        
+        h2{
+            font: 12vw/1 'anton' ;
+            color: #fff;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: 1s 0.3s;
+        }
+        p{
+            font: 18px/1.2 'arial';
+            color: #fff;
+            letter-spacing: 1px;
+            opacity: 0;
+            margin-bottom: 50px;
+            transform: translateX(-100px);
+            transition: 1s 0.8s;
+        }
+        .close{
+            width: 200px;
+            height: 40px;
+            border: 2px solid #fff;
+            font: bold 14px/1 'arial';
+            color: #fff;
+            cursor: pointer;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+
+            &:hover{
+                background-color: #fff;
+                color: #777;
+            }
+        }
+        &.on{
+            
+            left: 0;
+           
+            h2,
+            p,
+            .close{
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1199px){
+    figure{
+        .banner{
+            ul{
+                li{
+                    &:nth-of-type(4){
+                        transform: translateX(0px) scale(0.7);
+                        h2{
+                            top: -20vh;
+                            font-size: 37vw;
+                        }
+                        a{
+                            width: 100%;
+                            bottom: -25%;
+                        }
+                    }
+                }
+            }           
+        }
+        .btns{
+            width: 100%;
+            bottom: 6vh;
+            justify-content: center;
+            right: 0vw;
+        }
+    }
+}
